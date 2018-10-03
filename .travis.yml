@@ -12,7 +12,7 @@ branches:
 script:
 
   - docker build -t inukisoft/python-microtest . 
-  - docker run inukisoft/python-microtest $project
+  - docker run -d inukisoft/python-microtest $project
 
 after_script:
   - docker images
