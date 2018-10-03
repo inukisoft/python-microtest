@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+branches:
+
+  only:
+    - master
+    
+
+before_install:
+
+
+install:
+
+  - docker build -t inukisoft/python-microtest
+
+script:
+
+  - docker run inukisoft/python-microtest$ $project
