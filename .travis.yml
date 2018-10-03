@@ -7,14 +7,14 @@ branches:
 
   only:
     - master
-    
+
 
 before_install:
 
 
 install:
 
-  - docker build -t inukisoft/python-microtest
+  - docker build -t inukisoft/python-microtest .
 
 script:
 
