@@ -7,4 +7,4 @@ ADD . /code/
 RUN pip install -r requirements.txt
 
 EXPOSE 9090
-cmd ["python","/code/app.py"]
+cmd ["nohup", "python","/code/app.py","&"]
