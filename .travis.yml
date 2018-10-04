@@ -12,12 +12,14 @@ branches:
 script:
 
   - docker build -t inukisoft/python-microtest . 
-  - docker run -d inukisoft/python-microtest $project
+#  - docker run -d inukisoft/python-microtest $project
+
 
 after_script:
   - docker images
 
 before_deploy:
+
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 deploy:
@@ -25,3 +27,5 @@ deploy:
   script: docker push inukisoft/python-microtest
   on:
     branch: master
+    
+  - docker-cloud service run -p 80 --name web inukisoft/python-microtest
