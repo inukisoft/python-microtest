@@ -2,3 +2,4 @@ Flask==0.12.4
 connexion==1.5.2
 Flask-Injector==0.10.1
 fastavro==0.21.6
+injector==0.12.0
