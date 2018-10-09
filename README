@@ -1,0 +1,4 @@
+cómo se ejecuta esto en un swarm? 
+
+docker stack deploy --compose-file docker-compose.yml stack-python
+
