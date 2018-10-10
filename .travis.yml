@@ -24,10 +24,11 @@ script:
 
   - docker build -t inukisoft/python-microtest .
   - docker tag python-microtest inukisoft/python-microtest
+  - docker push inukisoft/python-microtest
 
   - eval "$(ssh-agent -s)"
   - chmod 600 ./deploy_key
-#  - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-add ./deploy_key
   - ssh -i ./deploy_key ubuntu@elorigendelaespecie.com pwd
 
