@@ -10,7 +10,7 @@ branches:
 
 before_install:
 
-  - openssl aes-256-cbc -K $encrypted_77965d5bdd4d_key -iv $encrypted_77965d5bdd4d_iv -in .travis/inuki2.pem.enc -out ./deploy_key -d
+  - openssl aes-256-cbc -K $encrypted_c37dc1143c88_key -iv $encrypted_c37dc1143c88_iv -in .travis/inuki2.pem.enc -out ./deploy_key -d
 
   # bajando el cliente de heroku y login
   #- wget -qO- https://toolbelt.heroku.com/install.sh | sh
