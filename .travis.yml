@@ -9,6 +9,9 @@ branches:
     - master
 
 before_install:
+
+  - openssl aes-256-cbc -K $encrypted_77965d5bdd4d_key -iv $encrypted_77965d5bdd4d_iv -in .travis/inuki2.pem.enc -out ./deploy_key -d
+
   # bajando el cliente de heroku y login
   #- wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
@@ -21,7 +24,17 @@ script:
 
   - docker build -t inukisoft/python-microtest .
   - docker tag python-microtest inukisoft/python-microtest
-  - docker stack deploy --compose-file docker-compose.yml stack-python
+
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./deploy_key
+#  - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - ssh-add ./deploy_key
+  - ssh -i ./deploy_key ubuntu@elorigendelaespecie.com pwd
+
+
+
+
+#  - docker stack deploy --compose-file docker-compose.yml stack-python
 
 #  - docker run -d inukisoft/python-microtest $project
 #  - docker tag inukisoft/python-microtest registry.heroku.com/$HEROKU_APP_NAME/web
