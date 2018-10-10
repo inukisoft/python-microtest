@@ -9,7 +9,7 @@ from services.provider import ItemsProvider
 def configure(binder: Binder) -> Binder:
     binder.bind(
         ItemsProvider,
-        ItemsProvider([{"Name": os.getenv('HOSTNAME')}])
+        ItemsProvider([{"IdContenedor": os.getenv('HOSTNAME')}])
     )
 
 if __name__ == '__main__':

@@ -10,18 +10,23 @@ branches:
 
 before_install:
   # bajando el cliente de heroku y login
-  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  #- wget -qO- https://toolbelt.heroku.com/install.sh | sh
 
   # login al docker registries de heroku (dockerhub + heroku)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+  #- echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+
 
 script:
 
-  - docker build -t inukisoft/python-microtest . 
+  - docker build -t inukisoft/python-microtest .
+  - docker tag python-microtest inukisoft/python-microtest
+  - docker stack deploy --compose-file docker-compose.yml stack-python
+
 #  - docker run -d inukisoft/python-microtest $project
-  - docker tag inukisoft/python-microtest registry.heroku.com/$HEROKU_APP_NAME/web
-  - docker push registry.heroku.com/$HEROKU_APP_NAME/web
+#  - docker tag inukisoft/python-microtest registry.heroku.com/$HEROKU_APP_NAME/web
+#  - docker push registry.heroku.com/$HEROKU_APP_NAME/web
+
 
 after_script:
 
@@ -31,10 +36,10 @@ before_deploy:
 
 
 deploy:
-  provider: script
-  script: 
-    docker push inukisoft/python-microtest;
-    docker push registry.heroku.com/$HEROKU_APP_NAME/web;    
-    heroku container:release web --app $HEROKU_APP_NAME
-  on:
-    branch: master  
+#  provider: script
+#  script: 
+#    docker push inukisoft/python-microtest;
+#    docker push registry.heroku.com/$HEROKU_APP_NAME/web;    
+#    heroku container:release web --app $HEROKU_APP_NAME
+#  on:
+#    branch: master  
