@@ -26,14 +26,14 @@ before_install:
 script:
 
   - docker build -t inukisoft/python-microtest .
-  - docker tag python-microtest inukisoft/python-microtest
+#  - docker tag python-microtest inukisoft/python-microtest
   - docker push inukisoft/python-microtest
 
   - eval "$(ssh-agent -s)"
   - chmod 600 ./deploy_key
   - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-add ./deploy_key
-  - ssh -i ./deploy_key ubuntu@elorigendelaespecie.com 'docker stack deploy --compose-file /home/ubuntu/dev/python-microtest/docker-compose.yml stack-python'
+  - ssh -i ./deploy_key ubuntu@elorigendelaespecie.com 'docker stack deploy --compose-file /home/ubuntu/dev/python-microtest/docker-compose.yml stack-python ; docker service ls'
 
 
 
